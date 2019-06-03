@@ -16,7 +16,7 @@ const Bound = styled.section`
   img {
     width: 40px;
     height: 40px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 50%;
   }
   tbody {

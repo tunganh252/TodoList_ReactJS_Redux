@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import thor from "../../../images/Thor.jpg";
+import christ from "../../../images/Christ.jpg";
+import iron from "../../../images/ironMan.jpg";
+import avatar from "../../../images/avatar.png";
+import girl from "../../../images/Girl.png";
 
 export default class Item extends Component {
   getLabelColor = label => {
@@ -18,6 +22,45 @@ export default class Item extends Component {
         break;
     }
     return labelColor;
+  };
+
+  renderUser = () => {
+    return this.props.item.memberIDArr.map((item, index) => {
+      switch (item) {
+        case "user_1":
+          return (
+            <div key={index} className="col-4">
+              <img src={avatar} alt="sdfsdf" />
+            </div>
+          );
+        case "user_2":
+          return (
+            <div key={index} className="col-4">
+              <img src={iron} alt="sdfsdf" />
+            </div>
+          );
+        case "user_3":
+          return (
+            <div key={index} className="col-4">
+              <img src={girl} alt="sdfsdf" />
+            </div>
+          );
+        case "user_4":
+          return (
+            <div key={index} className="col-4">
+              <img src={christ} alt="sdfsdf" />
+            </div>
+          );
+        case "user_5":
+          return (
+            <div key={index} className="col-4">
+              <img src={thor} alt="sdfsdf" />
+            </div>
+          );
+        default:
+          break;
+      }
+    });
   };
 
   render() {
@@ -54,41 +97,58 @@ export default class Item extends Component {
       default:
         break;
     }
-
-
-
-
+    // Status
+    let classStatus;
+    switch (parseInt(item.status, 10)) {
+      case 1:
+        classStatus = <i className="fas fa-spinner mr-3" />;
+        break;
+      case 2:
+        classStatus = <i className="fas fa-exclamation-triangle mr-3" />;
+        break;
+      case 3:
+        classStatus = <i className="fas fa-check-square mr-3" />;
+        break;
+      default:
+        break;
+    }
     return (
       <tr>
         <td>{index + 1}</td>
-        <td>{item.name}</td>
+        <td style={{ fontWeight: "700" }}>{item.name}</td>
         <td className="d-flex">
           {/* Label Array */}
           {elmLabel}
         </td>
         <td className="high">
-          <p className={classPriority}>
-            {elmPriority}
-          </p>
+          <p className={classPriority}>{elmPriority}</p>
         </td>
         <td>
-          <img className="m-1" src={thor} alt="thor" />
-          <img className="m-1" src={thor} alt="thor" />
+          <div className="row">{this.renderUser()}</div>
         </td>
         <td>
-          <button type="button" className="btn btn-outline-primary">
+          <button
+            type="button"
+            className="btn btn-outline-danger btn-sm btn-block mb-2"
+          >
             Sửa
           </button>
-          <button type="button" className="btn btn-outline-success ml-1">
-            Xong
-          </button>
-          <button type="button" className="btn btn-outline-danger ml-1">
-            Xóa
-          </button>
+          <div className="form-group">
+            <select
+              defaultValue="Settings"
+              className="form-control"
+              id="sel1"
+              style={{ color: "black", fontWeight: "600" }}
+            >
+              <option disabled>Settings</option>
+              <option>Đang tiến hành</option>
+              <option>Chưa thực hiện</option>
+              <option>Hoàn thành</option>
+              <option>Hủy bỏ</option>
+            </select>
+          </div>
         </td>
-        <td className="done">
-          <i className="far fa-check-square" />
-        </td>
+        <td className="done">{classStatus}</td>
       </tr>
     );
   }

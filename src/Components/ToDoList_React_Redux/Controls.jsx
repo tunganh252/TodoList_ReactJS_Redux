@@ -51,7 +51,9 @@ export default class Controls extends Component {
               {/* Thêm công việc mới */}
               <AddNewTask />
               {/* Lấy task từ LocalStorage */}
-              <GetTaskLocalStorage />
+              <GetTaskLocalStorage
+              generateData={this.props.generateData}
+              />
               {/* ///////////////  FILTER AND SORT ///////////////// */}
               {/* Filter Progress */}
               <FilterProgress />

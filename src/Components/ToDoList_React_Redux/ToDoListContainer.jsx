@@ -4,7 +4,7 @@ import ModalPopup from "./ModalPopup";
 import Controls from "./Controls";
 import TaskItems from "./TaskItems";
 
-import listOfTask from '../../Modal/GetData';
+import listOfTask from "../../Modal/GetData";
 
 const Bound = styled.div`
   h1 {
@@ -17,24 +17,57 @@ const Bound = styled.div`
   }
 `;
 
+
 export default class ToDoListContainer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state={
+      tasks:[]
+    }
+  }
+  
+
+  generateData = () => {
+    localStorage.setItem('generateData', JSON.stringify(listOfTask.list));
+    let data = JSON.parse(localStorage.getItem('generateData'));
+    this.setState({
+      tasks:data
+    })
+  }
+
   render() {
-    
     return (
       <Bound>
         <h1 className=" m-3">QUẢN LÝ CÔNG VIỆC</h1>
         <div className="container-fluid">
           <div className="row main">
-            <div className="col-md-2">
-              <Controls />
+            <div className="col-xl-3">
+              <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span className="navbar-toggler-icon" />
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <Controls
+              generateData={this.generateData}
+              />
+
+                </div>
+              </nav>
             </div>
-            <div className="col-md-10">
-              <TaskItems
-              listOfTask={listOfTask.list}
-               />
+            <div className="col-xl-9">
+              <TaskItems listOfTask={this.state.tasks} />
             </div>
           </div>
-        <ModalPopup/>
+          <ModalPopup />
         </div>
       </Bound>
     );

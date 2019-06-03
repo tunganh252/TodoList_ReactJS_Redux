@@ -9,7 +9,7 @@ const TaskData = [
     name: "Học ReactJS",
     labelArr: ["FrontEnd", "API", "Issue"],
     priority: 1,
-    memberIDArr: ["user_2"],
+    memberIDArr: ["user_2",'user_1','user_5'],
     status: 2,
     desc: "Sử dụng thành thạo ReactJS kết hợp Redux"
   },
@@ -28,7 +28,7 @@ const TaskData = [
     labelArr: ['BackEnd',"Issue","FrontEnd"],
     priority: 2,
     memberIDArr: ["user_3", "user_2"],
-    status: 2,
+    status: 3,
     desc: "VueJS khá dễ học và kế thừa nhiều điểm hay của ReactJS và AngularJS"
   },
   {
