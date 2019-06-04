@@ -36,6 +36,17 @@ export default class ToDoListContainer extends Component {
     })
   }
 
+  addNewTask = (data) => {
+    console.log(data);
+    let tasksJSON = JSON.parse(localStorage.getItem('generateData'));
+    tasksJSON= [...tasksJSON,data];
+    this.setState({
+      tasks: tasksJSON
+    })
+    localStorage.setItem('generateData', JSON.stringify(tasksJSON));
+    alert('Thêm thành công !')
+  }
+
   render() {
     return (
       <Bound>
@@ -67,7 +78,9 @@ export default class ToDoListContainer extends Component {
               <TaskItems listOfTask={this.state.tasks} />
             </div>
           </div>
-          <ModalPopup />
+          <ModalPopup 
+          addNewTask = {this.addNewTask}
+          />
         </div>
       </Bound>
     );
