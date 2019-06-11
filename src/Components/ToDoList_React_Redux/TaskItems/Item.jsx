@@ -30,7 +30,7 @@ export default class Item extends Component {
             .item
             .memberIDArr
             .filter(a => a !== '');
-    return newData.map((item, index) => {
+    return newData.map((item, index) =>  {
             switch (item) {
                 case "user_1":
                     return (
@@ -68,6 +68,14 @@ export default class Item extends Component {
             }
         });
     };
+
+    editTask = () => {
+        this.props.editTask(this.props.item)
+    }
+    deleteTask = () => {
+        let {item} = this.props;
+        this.props.deleteTask(item.id)
+    }
 
     render() {
         let {item, index} = this.props;
@@ -137,8 +145,16 @@ export default class Item extends Component {
                     <div className="row">{this.renderUser()}</div>
                 </td>
                 <td>
-                    <button type="button" className="btn btn-outline-danger btn-sm btn-block mb-2">
+                    <button 
+                    onClick={this.editTask}
+                    data-toggle="modal" data-target="#myModal"
+                    type="button" className="btn btn-outline-success btn-sm btn-block mb-2">
                         Sửa
+                    </button>
+                    <button 
+                    onClick={this.deleteTask}
+                    type="button" className="btn btn-outline-danger btn-sm btn-block mb-2">
+                        Xóa
                     </button>
                     <div className="form-group">
                         <select
@@ -156,6 +172,7 @@ export default class Item extends Component {
                             <option>Hủy bỏ</option>
                         </select>
                     </div>
+                  
                 </td>
                 <td className="done">{classStatus}</td>
             </tr>

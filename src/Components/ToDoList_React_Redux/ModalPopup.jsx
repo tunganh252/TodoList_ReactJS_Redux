@@ -154,7 +154,8 @@ export default class ModalPopup extends Component {
                 </div>
 
                 <div className="modal-footer">
-                  <button type="submit" className="btn btn-success"
+                  <button 
+                  type="submit" className="btn btn-success"
                   >
                     Thêm Tasks
                   </button>

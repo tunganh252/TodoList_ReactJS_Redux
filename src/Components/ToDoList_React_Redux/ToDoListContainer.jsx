@@ -4,7 +4,7 @@ import ModalPopup from "./ModalPopup";
 import Controls from "./Controls";
 import TaskItems from "./TaskItems";
 
-import listOfTask from "../../Modal/GetData";
+// import listOfTask from "../../Modal/GetData";
 
 const Bound = styled.div`
   h1 {
@@ -17,34 +17,46 @@ const Bound = styled.div`
   }
 `;
 
-
 export default class ToDoListContainer extends Component {
-
   constructor(props) {
     super(props);
-    this.state={
-      tasks:[]
+    this.state = {
+      tasks: []
+    };
+  }
+
+
+  addNewTask = data => {
+  let tasks = [...this.state.tasks, data]
+    this.setState({
+      tasks
+    })
+    localStorage.setItem("generateData", JSON.stringify(tasks));
+    alert("Thêm thành công !");
+    
+  };
+  componentDidMount () {
+    if (JSON.parse(localStorage.getItem('generateData'))) {
+      let tasks =JSON.parse(localStorage.getItem('generateData'));
+      this.setState({
+        tasks
+      })
     }
   }
-  
 
-  generateData = () => {
-    localStorage.setItem('generateData', JSON.stringify(listOfTask.list));
-    let data = JSON.parse(localStorage.getItem('generateData'));
-    this.setState({
-      tasks:data
-    })
-  }
-
-  addNewTask = (data) => {
+  editTask = (data) => {
     console.log(data);
-    let tasksJSON = JSON.parse(localStorage.getItem('generateData'));
-    tasksJSON= [...tasksJSON,data];
+    
+  } 
+
+  deleteTask = (id) => {
+    console.log(id);
+    let tasks = this.state.tasks.filter(item => item.id !== id)
     this.setState({
-      tasks: tasksJSON
+      tasks
+    }, () => {
+      localStorage.setItem("generateData", JSON.stringify(tasks));
     })
-    localStorage.setItem('generateData', JSON.stringify(tasksJSON));
-    alert('Thêm thành công !')
   }
 
   render() {
@@ -66,21 +78,23 @@ export default class ToDoListContainer extends Component {
                 >
                   <span className="navbar-toggler-icon" />
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <Controls
-              generateData={this.generateData}
-              />
-
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <Controls generateData={this.generateData} />
                 </div>
               </nav>
             </div>
             <div className="col-xl-9">
-              <TaskItems listOfTask={this.state.tasks} />
+              <TaskItems
+              deleteTask={this.deleteTask}
+              editTask={this.editTask}
+              listOfTask={this.state.tasks} 
+              />
             </div>
           </div>
-          <ModalPopup 
-          addNewTask = {this.addNewTask}
-          />
+          <ModalPopup addNewTask={this.addNewTask} />
         </div>
       </Bound>
     );

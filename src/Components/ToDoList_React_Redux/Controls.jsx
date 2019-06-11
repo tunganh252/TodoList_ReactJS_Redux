@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import AddNewTask from "./Controls/AddNewTask";
-import GetTaskLocalStorage from "./Controls/GetTaskLocalStorage";
+// import GetTaskLocalStorage from "./Controls/GetTaskLocalStorage";
 import FilterProgress from "./Controls/FilterProgress";
 import FilterLable from "./Controls/FilterLable";
 import FilterPriority from "./Controls/FilterPriority";
@@ -51,9 +51,9 @@ export default class Controls extends Component {
               {/* Thêm công việc mới */}
               <AddNewTask />
               {/* Lấy task từ LocalStorage */}
-              <GetTaskLocalStorage
+              {/* <GetTaskLocalStorage
               generateData={this.props.generateData}
-              />
+              /> */}
               {/* ///////////////  FILTER AND SORT ///////////////// */}
               {/* Filter Progress */}
               <FilterProgress />

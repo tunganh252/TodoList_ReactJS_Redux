@@ -113,6 +113,8 @@ export default class TaskItems extends Component {
           key={index}
           item={item}
           index={index}
+          editTask={this.props.editTask}
+          deleteTask={this.props.deleteTask}
         />
       )
     })
